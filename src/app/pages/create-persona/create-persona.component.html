@@ -1,0 +1,41 @@
+<div class="contenido">
+	<form class="form">
+		<h1>Dueño:</h1><br>
+	  <mat-form-field class="full-width">
+	    <mat-label>Nombre dueño</mat-label>
+	    <input type="text" matInput [formControl]="nombreFormControl" placeholder="Nombre dueño">
+	  </mat-form-field>
+	  <br>
+	  <mat-form-field class="full-width">
+	    <mat-label>Apellido dueño</mat-label>
+	    <input type="text" matInput [formControl]="apellidoFormControl" placeholder="Apellido dueño">
+	  </mat-form-field>
+	</form>
+	<form [formGroup]="mascotasForm" (ngSubmit)="onSubmit()">
+	  <h2>Mascotas:</h2>
+	  <div formArrayName="mascotas">
+	    <div *ngFor="let mascota of mascotas.controls; let i=index">
+	      <div [formGroupName]="i">
+	        {{i+1}}
+	        <mat-form-field class="full-width">
+		        <mat-label>Nombre Mascota</mat-label>
+		        <input matInput type="text" formControlName="nombre"  placeholder="Nombre de Mascota">
+		    </mat-form-field>
+		    <br>
+			 <mat-form-field appearance="fill">
+			  <mat-label>Tipo de Mascota</mat-label>
+			  <mat-select formControlName="idTipoMascota">
+			    <mat-option value="1">Perro</mat-option>
+			    <mat-option value="2">Ave</mat-option>
+			  </mat-select>
+			</mat-form-field>
+	        <button (click)="removeMascota(i)" mat-raised-button>Quitar</button>
+	      </div>
+	    </div>
+	  </div>
+	  <p>
+	  <button type="button" (click)="addMascotas()" mat-raised-button>Agregar Mascota</button>
+		</p>
+	</form>
+	<button type='button' mat-raised-button color="primary" (click)="registerPersona()">Crear Dueño</button>
+</div>
